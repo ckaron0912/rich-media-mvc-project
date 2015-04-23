@@ -1,0 +1,14 @@
+extends ./base.jade
+block append style
+    link(rel='stylesheet', type='text/css', href='/assets/style.css')
+  block body
+    nav#header
+      h1 Admiralty
+      ul
+        li
+          a(href='/login') Login
+        li
+          a(href='/register') Register
+    section#content
+      h2 Build your army!
+      p Words to convince you to play this game
