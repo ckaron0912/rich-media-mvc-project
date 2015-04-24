@@ -8,6 +8,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var session = require("express-session");
 var RedisStore = require("connect-redis")(session);
+var url = require("url");
 
 var dbURL = process.env.MONGOLAB_URI || "mongodb://localhost/Admiralty";
 
@@ -17,6 +18,20 @@ var db = mongoose.connect(dbURL, function(err) {
         throw err;
     }
 });
+
+var redisURL = {
+
+    hostname: "localhost",
+    port: 6379
+};
+
+var redisPASS;
+
+if(process.env.REDISCLOUD_URL){
+
+    redisURL = url.parse(process.env.REDISCLOUD_URL);
+    redisPASS = redisURL.auth.split(":")[1];
+}
 
 //pull in our routes
 var router = require("./router.js");
@@ -33,7 +48,12 @@ app.use(bodyParser.urlencoded({
 
 app.use(session({
 
-    store: new RedisStore(),
+    store: new RedisStore({
+
+        host: redisURL.hostname,
+        port: redisURL.port,
+        pass: redisPASS
+    }),
     secret: "Admiral on deck",
     resave: true,
     saveUninitialized: true
