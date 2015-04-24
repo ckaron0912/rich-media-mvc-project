@@ -3,8 +3,9 @@ block append style
     link(rel="stylesheet", type="text/css", href="/assets/style.css")
 block body
   nav
-    a(href="/login")
-      img#logo(src="", alt="")
+    a(href="/")
+      img#logo(src="/assets/img/admiral.png", alt="logo")
+      h1#title Admiralty
     .navlink
       a(href="/login") Login
     .navlink
@@ -17,11 +18,8 @@ block body
       input#pass(type="password", name="pass", placeholder="password")
       label(for="pass2") Password:
       input#pass2(type="password", name="pass2", placeholder="retype password")
-      a#signupSubmit(class="formSubmit", href="#") Register
-  #domoMessage
-    img#speech(src="/assets/img/speech.png", alt="speech box")
-    h3
+    h3#error
       span#errorMessage
-    img(src="", alt="")
+    a#signupSubmit(class="formSubmit", href="#") Register
 block scripts
         script(src="/assets/client.js")

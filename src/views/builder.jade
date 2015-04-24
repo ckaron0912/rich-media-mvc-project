@@ -1,1 +1,15 @@
 extends ./base.jade
+block append style
+    link(rel="stylesheet", type="text/css", href="/assets/style.css")
+block body
+  nav
+    a(href="/login")
+      img#logo(src="/assets/img/admiral.png", alt="logo")
+    .navlink#logout-btn
+      a(href="/logout") Log out
+  h2#welcome Welcome Admiral #{username}!
+  section#shipyard
+    h3
+      span#errorMessage
+block scripts
+        script(src="/assets/builder.js")

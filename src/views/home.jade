@@ -2,13 +2,17 @@ extends ./base.jade
 block append style
     link(rel='stylesheet', type='text/css', href='/assets/style.css')
   block body
-    nav#header
-      h1 Admiralty
-      ul
-        li
-          a(href='/login') Login
-        li
-          a(href='/register') Register
+    nav
+      a(href="/")
+        img#logo(src="/assets/img/admiral.png", alt="logo")
+        h1#title Admiralty
+      .navlink
+        a(href="/login") Login
+      .navlink
+        a(href="/register") Register
     section#content
       h2 Build your army!
-      p Words to convince you to play this game
+      p Admiralty is a game where you spend resources to build warships in order to increase your "War Strength."
+      h2 Mine for resources!
+      img(src="/assets/img/miner.png", alt="miner img")
+      p Use miners to increase your resources earned over time using ships like this one.

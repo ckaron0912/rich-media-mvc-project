@@ -31,7 +31,7 @@ var login = function(req, res) {
 
         req.session.account = account.toAPI();
 
-        res.json({redirect: '/builderPage'});
+        res.json({redirect: '/builder'});
     });
 
 };
@@ -64,7 +64,7 @@ var signup = function(req, res) {
 
             req.session.account = newAccount.toAPI();
 
-			res.json({redirect: '/'});
+			res.json({redirect: '/builder'});
 		});
 	});
 };
