@@ -9,6 +9,7 @@ block body
       a(href="/logout") Log out
   h2#welcome Welcome Admiral #{username}!
   section#shipyard
+    //input(type="hidden", name="_csrf", value="#{csrfToken}") for token
     h3
       span#errorMessage
 block scripts

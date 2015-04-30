@@ -9,6 +9,7 @@ var mongoose = require("mongoose");
 var session = require("express-session");
 var RedisStore = require("connect-redis")(session);
 var url = require("url");
+var csrf = require("csurf");
 
 var dbURL = process.env.MONGOLAB_URI || "mongodb://localhost/Admiralty";
 
@@ -48,6 +49,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(session({
 
+    key: "sessionid",
     store: new RedisStore({
 
         host: redisURL.hostname,
@@ -56,13 +58,30 @@ app.use(session({
     }),
     secret: "Admiral on deck",
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+
+        httpOnly: true,
+        secure: true
+    }
 }));
 
 app.set("view engine", "jade");
 app.set("views", __dirname + "/views");
 app.use(favicon(__dirname + "/../client/img/favicon.png"));
+app.disable('x-powered-by');
 app.use(cookieParser());
+app.use(csrf());
+
+app.use(function(err, req, res, next){
+
+    if(err.code !== "EBADCSRFTOKEN"){
+
+        return next(err);
+    }
+
+    return;
+});
 
 router(app);
 

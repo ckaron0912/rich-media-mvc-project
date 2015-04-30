@@ -15,7 +15,8 @@ var builderPage = function(req, res) {
             console.log(err);
             return res.status(400).json({error: "An error occurred!"});
         }
-        res.render('builder', {username: req.session.account.username});
+        //console.log(req.session.account.username);
+        res.render('builder', {csrfToken: req.csrfToken(), username: req.session.account.username});
     });
 
 };
@@ -53,5 +54,5 @@ var makeDomo = function(req, res) {
     });
 };
 
-module.exports.BuilderPage = builderPage;
+module.exports.builderPage = builderPage;
 module.exports.make = makeDomo;

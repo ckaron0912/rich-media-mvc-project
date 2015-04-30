@@ -9,7 +9,7 @@ var router = function(app) {
     app.get("/logout", controllers.Account.logout);
     app.get("/register", controllers.Account.signupPage);
     app.post("/register", controllers.Account.signup);
-    app.get("/builder", controllers.Account.builderPage);
+    app.get("/builder", controllers.Builder.builderPage);
     app.get("/", controllers.Home.homePage);
 };
 
