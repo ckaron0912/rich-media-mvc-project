@@ -4,11 +4,11 @@ var mid = require("./middleware");
 
 var router = function(app) {
 
-    app.get("/login", mid.requiresLogout, controllers.Account.loginPage);
-    app.post("/login", controllers.Account.login);
+    app.get("/login", mid.requiresLogout, mid.requiresSecure, controllers.Account.loginPage);
+    app.post("/login",mid.requiresSecure, controllers.Account.login);
     app.get("/logout", controllers.Account.logout);
-    app.get("/register", controllers.Account.signupPage);
-    app.post("/register", controllers.Account.signup);
+    app.get("/register", mid.requiresSecure, controllers.Account.signupPage);
+    app.post("/register", mid.requiresSecure, controllers.Account.signup);
     app.get("/builder", controllers.Builder.builderPage);
     app.get("/", controllers.Home.homePage);
 };
