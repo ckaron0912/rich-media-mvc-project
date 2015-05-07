@@ -1,16 +1,38 @@
 extends ./base.jade
 block append style
     link(rel="stylesheet", type="text/css", href="/assets/style.css")
+    link(rel="stylesheet", type="text/css", href="/assets/TimeCircles.css")
 block body
   nav
     a(href="/login")
       img#logo(src="/assets/img/admiral.png", alt="logo")
     .navlink#logout-btn
       a(href="/logout") Log out
-  h2#welcome Welcome Admiral #{username}!
   section#shipyard
-    //input(type="hidden", name="_csrf", value="#{csrfToken}") for token
-    h3
+    h2#welcome Welcome Admiral #{username}!
+    ul#resources
+      li Credits
+        p#credits 500
+      li Metal
+        p#metal 1000
+      li Crystal
+        p#crystal 50
+      li War Score
+        p#score 1
+    ul#shipList
+      li
+        img.shipIcon(src="", alt="shipIcon")
+        h2 Miner
+        section.cost
+            button#buyMiner(name="miner") Build Miner
+            div#minerTimer.timer(data-timer="11")
+      li
+        img.shipIcon(src="", alt="shipIcon")
+        h2 not miner
+        section.cost
+            button#buyNotMiner(name="notMiner") Build notMiner
+            div#notminerTimer.timer(data-timer="16")
       span#errorMessage
 block scripts
         script(src="/assets/builder.js")
+        script(src="/assets/TimeCircles.js")
