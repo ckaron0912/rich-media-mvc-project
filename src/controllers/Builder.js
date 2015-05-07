@@ -21,6 +21,19 @@ var builderPage = function(req, res) {
 
 };
 
+var save = function(req, res){
+
+    console.log(req);
+    User.AccountModel.findByUsername(req.session.account.username, function(err, user){
+
+        if(err){
+            console.log(err);
+            return res.status(400).json({error: "An error occurred!"});
+        }
+
+    });
+};
+
 var makeDomo = function(req, res) {
 
     if(!req.session.account){
@@ -55,4 +68,4 @@ var makeDomo = function(req, res) {
 };
 
 module.exports.builderPage = builderPage;
-module.exports.make = makeDomo;
+module.exports.save = save;

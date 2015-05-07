@@ -11,6 +11,15 @@ $(document).ready(function() {
     var currentMetal = parseInt($("#metal").html());
     var numMiners = 1;
     var minerButton = $("#buyMiner");
+
+    //setup save Timer
+    setInterval(function(){
+
+        save();
+
+    }, 300000);
+
+    //setup TimeCircles
     $(".timer").TimeCircles({
 
         start: false,
@@ -38,6 +47,7 @@ $(document).ready(function() {
                 warScore++;
                 numMiners++;
                 updateValues();
+                save();
                 this.TimeCircles().restart().rebuild();
             }
         });
@@ -64,6 +74,8 @@ $(document).ready(function() {
     }
 
     function sendAjax(action, data) {
+        console.log("send");
+
         $.ajax({
             cache: false,
             type: "POST",
@@ -72,6 +84,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(result, status, xhr) {
 
+                console.log(saved);
                 window.location = result.redirect;
             },
             error: function(xhr, status, error) {
@@ -82,8 +95,21 @@ $(document).ready(function() {
         });
     }
 
+    function save(){
+
+        var json = {
+
+            "score": warScore,
+            "miners": numMiners,
+            "credits": currentCredits,
+            "metal": currentMetal,
+            "crystal": currentCrystal
+        };
+
+        sendAjax("/builder", json);
+    }
+
     $("button").on("click", function(e) {
-        console.log();
 
         var button = e.currentTarget;
 
@@ -133,7 +159,7 @@ $(document).ready(function() {
     }
 
     setInterval(function(){
-        console.log(currentCrystal);
+
         currentCredits += (1 * numMiners);
         currentCrystal += (.2 * numMiners);
         currentCrystal = parseFloat(currentCrystal.toFixed(1));

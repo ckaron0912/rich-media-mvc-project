@@ -45,8 +45,15 @@ var AccountSchema = new mongoose.Schema({
         default: 1000
     },
 
-    ships: {
-        type: Array
+    miners: {
+        type: Number,
+        default: 1
+    },
+
+    score: {
+
+        type: Number,
+        default: 1
     }
 
 });

@@ -10,6 +10,7 @@ var router = function(app) {
     app.get("/register", controllers.Account.signupPage);
     app.post("/register", controllers.Account.signup);
     app.get("/builder", controllers.Builder.builderPage);
+    app.post("/builder", controllers.Builder.save);
     app.get("/", controllers.Home.homePage);
 };
 
