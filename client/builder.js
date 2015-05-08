@@ -9,9 +9,10 @@ $(document).ready(function() {
     var currentCrystal =  parseFloat($("#crystal").html());
     var currentCredits = parseInt($("#credits").html());
     var currentMetal = parseInt($("#metal").html());
-    var numMiners = 1;
+    var numMiners = miners;
     var minerButton = $("#buyMiner");
 
+    console.log(numMiners);
     //setup save Timer
     setInterval(function(){
 
@@ -74,6 +75,7 @@ $(document).ready(function() {
     }
 
     function sendAjax(action, data) {
+
         console.log("send");
 
         $.ajax({
@@ -84,7 +86,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(result, status, xhr) {
 
-                console.log(saved);
+                console.log("saved");
                 window.location = result.redirect;
             },
             error: function(xhr, status, error) {
@@ -97,8 +99,11 @@ $(document).ready(function() {
 
     function save(){
 
+        var csrf = $("#csrf").val();
+
         var json = {
 
+            "_csrf": csrf,
             "score": warScore,
             "miners": numMiners,
             "credits": currentCredits,

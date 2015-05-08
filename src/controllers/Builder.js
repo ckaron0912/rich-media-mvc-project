@@ -4,6 +4,7 @@ var models = require('../models');
 var User = models.Account;
 
 var builderPage = function(req, res) {
+
     if(!req.session.account){
 
         return res.redirect('/');
@@ -12,18 +13,29 @@ var builderPage = function(req, res) {
     User.AccountModel.findByUsername(req.session.account.username, function(err, user){
 
         if(err){
+
             console.log(err);
             return res.status(400).json({error: "An error occurred!"});
         }
+
+        var jadeData = {
+            csrfToken: req.csrfToken(),
+            username: req.session.account.username,
+            "score": user.score,
+            "metal": user.metal,
+            "credits": user.credits,
+            "crystal": user.crystal,
+            "miners": user.miners
+        };
+
         //console.log(req.session.account.username);
-        res.render('builder', {csrfToken: req.csrfToken(), username: req.session.account.username});
+        res.render('builder', jadeData);
     });
 
 };
 
 var save = function(req, res){
 
-    console.log(req);
     User.AccountModel.findByUsername(req.session.account.username, function(err, user){
 
         if(err){
@@ -31,6 +43,26 @@ var save = function(req, res){
             return res.status(400).json({error: "An error occurred!"});
         }
 
+        var saveData = {
+
+            "_id": user._id,
+            "score": req.body.score,
+            "crystal": req.body.crystal,
+            "credits": req.body.credits,
+            "metal": req.body.metal,
+            "miners": req.body.miners
+        };
+
+        user.save(saveData, function(err){
+
+            if(err){
+
+                console.log(err);
+                return res.status(400).json({error: "An error occurred!"});
+            }
+
+            return res.json({redirect: "/builder"});
+        });
     });
 };
 

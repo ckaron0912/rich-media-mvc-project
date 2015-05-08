@@ -12,13 +12,14 @@ block body
     h2#welcome Welcome Admiral #{username}!
     ul#resources
       li Credits
-        p#credits 500
+        p#credits #{credits}
       li Metal
-        p#metal 1000
+        p#metal #{metal}
       li Crystal
-        p#crystal 50
+        p#crystal #{crystal}
       li War Score
-        p#score 1
+        p#score #{score}
+    input#csrf(type="hidden", name="_csrf", value="#{csrfToken}")
     ul#shipList
       li
         img.shipIcon(src="", alt="shipIcon")
@@ -35,4 +36,6 @@ block body
       span#errorMessage
 block scripts
         script(src="/assets/builder.js")
+        script.
+          var miners = "#{miners}";
         script(src="/assets/TimeCircles.js")
