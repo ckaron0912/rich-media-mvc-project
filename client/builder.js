@@ -12,7 +12,6 @@ $(document).ready(function() {
     var numMiners = miners;
     var minerButton = $("#buyMiner");
 
-    console.log(numMiners);
     //setup save Timer
     setInterval(function(){
 
@@ -37,6 +36,7 @@ $(document).ready(function() {
         }
     });
 
+    //timers for each ship
     var minerTimer = $("#minerTimer");
     minerTimer.TimeCircles().addListener(
         function(unit, value, total){
@@ -86,8 +86,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(result, status, xhr) {
 
-                console.log("saved");
-                window.location = result.redirect;
+                console.log(result.result);
             },
             error: function(xhr, status, error) {
                 var messageObj = JSON.parse(xhr.responseText);
@@ -113,6 +112,11 @@ $(document).ready(function() {
 
         sendAjax("/builder", json);
     }
+
+    $("#logout-btn").on("click", function(e){
+
+        save();
+    });
 
     $("button").on("click", function(e) {
 
