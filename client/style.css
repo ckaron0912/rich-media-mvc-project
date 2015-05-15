@@ -50,20 +50,53 @@ html, body {
 
     clear: both;
     list-style: none;
-    width: 500px;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #shipList li{
 
     border: 1px solid black;
-    height: 130px;
+    height: 150px;
+}
+
+#shipList .mats li{
+
+    border: none;
+    height: 30px;
+    list-style: none;
 }
 
 #shipList img{
 
-    width: 100;
-    height: 100;
+    width: 150px;
+    height: 50px;
+    margin-top: 34px;
+    margin-left: 10px;
     float: left;
+}
+
+#shipList h2{
+
+    float: left;
+    margin-left: 10px;
+}
+
+#shipList button{
+
+    margin-top: 40px;
+    float: right;
+}
+
+.cost{
+
+    width: 270px;
+    float: right;
+    display: -webkit-inline-box;
+    margin-right: 15px;
+    text-align: left;
+    font-size: 14px;
 }
 
 #title{

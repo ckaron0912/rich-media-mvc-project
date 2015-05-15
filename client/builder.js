@@ -11,6 +11,7 @@ $(document).ready(function() {
     var currentMetal = parseInt($("#metal").html());
     var numMiners = miners;
     var minerButton = $("#buyMiner");
+    var corvetteButton = $("#buyCorvette");
 
     //setup save Timer
     setInterval(function(){
@@ -43,10 +44,25 @@ $(document).ready(function() {
 
             if(total <= 0){
 
-                console.log("timer end");
+                console.log("minerTimer end");
                 minerButton.show();
                 warScore++;
                 numMiners++;
+                updateValues();
+                save();
+                this.TimeCircles().restart().rebuild();
+            }
+        });
+
+    var corvetteTimer = $("#corvetteTimer");
+    corvetteTimer.TimeCircles().addListener(
+        function(unit, value, total){
+
+            if(total <= 0){
+
+                console.log("corvetteTimer end");
+                corvetteButton.show();
+                warScore += 3;
                 updateValues();
                 save();
                 this.TimeCircles().restart().rebuild();
@@ -58,15 +74,24 @@ $(document).ready(function() {
 
         "miner":{
             "name": "miner",
-
             "cost":{
-
                 "metal": 100,
                 "crystal": 10,
                 "credits": 50
             },
             "score": 1,
             "buildTime": 10
+        },
+
+        "corvette":{
+            "name": "corvette",
+            "cost":{
+                "metal": 200,
+                "crystal": 50,
+                "credits": 200
+            },
+            "score": 3,
+            "buildTime": 15
         }
     };
 
@@ -144,6 +169,7 @@ $(document).ready(function() {
 
     function startBuild(ship){
 
+        console.log(minerButton);
         currentCredits -= ships[ship].cost.credits;
         currentMetal -= ships[ship].cost.metal;
         currentCrystal -= ships[ship].cost.crystal;
@@ -154,6 +180,11 @@ $(document).ready(function() {
 
             minerButton.hide();
             minerTimer.TimeCircles().start();
+        }
+        if(ship == "corvette"){
+
+            corvetteButton.hide();
+            corvetteTimer.TimeCircles().start();
         }
 
         buildQueue.push(ships[ship]);

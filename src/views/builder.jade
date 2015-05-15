@@ -22,17 +22,33 @@ block body
     input#csrf(type="hidden", name="_csrf", value="#{csrfToken}")
     ul#shipList
       li
-        img.shipIcon(src="", alt="shipIcon")
+        img.shipIcon(src="/assets/img/miner.png", alt="shipIcon")
         h2 Miner
         section.cost
-            button#buyMiner(name="miner") Build Miner
+            div.mats
+              ul
+                li
+                  p Credits: 50
+                li
+                  p Metal: 100
+                li
+                  p Crystal: 10
             div#minerTimer.timer(data-timer="11", name="miner")
+        button#buyMiner(name="miner") Build Ship
       li
         img.shipIcon(src="", alt="shipIcon")
-        h2 not miner
+        h2 Corvette
         section.cost
-            button#buyNotMiner(name="notMiner") Build notMiner
-            div#notminerTimer.timer(data-timer="16")
+            div.mats
+              ul
+                li
+                  p Credits: 200
+                li
+                  p Metal: 200
+                li
+                  p Crystal: 50
+            div#corvetteTimer.timer(data-timer="16")
+        button#buyCorvette(name="corvette") Build Ship
       span#errorMessage
 block scripts
         script(src="/assets/builder.js")
