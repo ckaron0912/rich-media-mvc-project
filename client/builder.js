@@ -82,13 +82,16 @@ $(document).ready(function() {
         start: false,
         animation: "smooth",
         total_duration: "Auto",
+        bg_width: .5,
+        fg_width: .03,
+        circle_bg_color: "#C8C6C6",
         time: {
             Days: {show: false},
             Hours: {show: false},
             Minutes: {show: false},
             Seconds: {
 
-                "color": "#99CCFF"
+                "color": "#FF0D00"
             }
         }
     });

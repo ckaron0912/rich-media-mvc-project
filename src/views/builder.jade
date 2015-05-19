@@ -21,6 +21,7 @@ block body
         p#score #{score}
     input#csrf(type="hidden", name="_csrf", value="#{csrfToken}")
     ul#shipList
+      span#errorMessage
       li
         img.shipIcon(src="/assets/img/miner.png", alt="shipIcon")
         h2 Miner
@@ -101,7 +102,6 @@ block body
                   p Score: 50
             div#battleshipTimer.timer(data-timer="60")
         button#buyBattleship(name="battleship") Build Ship
-      span#errorMessage
 block scripts
         script(src="/assets/builder.js")
         script.
