@@ -4,7 +4,6 @@ $(document).ready(function() {
 
     var timer = 0;
     var queueIndex = 0;
-    var buildQueue = [];
     var warScore = parseInt($("#score").html());
     var currentCrystal =  parseFloat($("#crystal").html());
     var currentCredits = parseInt($("#credits").html());
@@ -12,6 +11,63 @@ $(document).ready(function() {
     var numMiners = miners;
     var minerButton = $("#buyMiner");
     var corvetteButton = $("#buyCorvette");
+    var frigateButton = $("#buyFrigate");
+    var cruiserButton = $("#buyCruiser");
+    var battleshipButton = $("#buyBattleship");
+
+    //ship objects
+    var ships = {
+
+        "miner":{
+            "name": "miner",
+            "cost":{
+                "metal": 200,
+                "crystal": 10,
+                "credits": 50
+            },
+            "score": 1
+        },
+
+        "corvette":{
+            "name": "corvette",
+            "cost":{
+                "metal": 400,
+                "crystal": 50,
+                "credits": 200
+            },
+            "score": 3
+        },
+
+        "frigate":{
+            "name": "frigate",
+            "cost":{
+                "metal": 500,
+                "crystal": 100,
+                "credits": 350
+            },
+            "score": 10
+        },
+
+        "cruiser":{
+            "name": "corvette",
+            "cost":{
+                "metal": 700,
+                "crystal": 200,
+                "credits": 200
+            },
+            "score": 20
+        },
+
+        "battleship":{
+            "name": "corvette",
+            "cost":{
+                "metal": 1000,
+                "crystal": 400,
+                "credits": 200
+            },
+            "score": 50
+        }
+    };
 
     //setup save Timer
     setInterval(function(){
@@ -46,7 +102,7 @@ $(document).ready(function() {
 
                 console.log("minerTimer end");
                 minerButton.show();
-                warScore++;
+                warScore += ships["miner"].score;
                 numMiners++;
                 updateValues();
                 save();
@@ -62,38 +118,57 @@ $(document).ready(function() {
 
                 console.log("corvetteTimer end");
                 corvetteButton.show();
-                warScore += 3;
+                warScore += ships["corvette"].score;
                 updateValues();
                 save();
                 this.TimeCircles().restart().rebuild();
             }
         });
 
-    //ship objects
-    var ships = {
+    var frigateTimer = $("#frigateTimer");
+    frigateTimer.TimeCircles().addListener(
+        function(unit, value, total){
 
-        "miner":{
-            "name": "miner",
-            "cost":{
-                "metal": 100,
-                "crystal": 10,
-                "credits": 50
-            },
-            "score": 1,
-            "buildTime": 10
-        },
+            if(total <= 0){
 
-        "corvette":{
-            "name": "corvette",
-            "cost":{
-                "metal": 200,
-                "crystal": 50,
-                "credits": 200
-            },
-            "score": 3,
-            "buildTime": 15
-        }
-    };
+                console.log("frigateTimer end");
+                frigateButton.show();
+                warScore += ships["frigate"].score;
+                updateValues();
+                save();
+                this.TimeCircles().restart().rebuild();
+            }
+        });
+
+    var cruiserTimer = $("#cruiserTimer");
+    cruiserTimer.TimeCircles().addListener(
+        function(unit, value, total){
+
+            if(total <= 0){
+
+                console.log("cruiserTimer end");
+                cruiserButton.show();
+                warScore += ships["cruiser"].score;
+                updateValues();
+                save();
+                this.TimeCircles().restart().rebuild();
+            }
+        });
+
+    var battleshipTimer = $("#battleshipTimer");
+    battleshipTimer.TimeCircles().addListener(
+        function(unit, value, total){
+
+            if(total <= 0){
+
+                console.log("battleshipTimer end");
+                battleshipButton.show();
+                warScore += ships["battleship"].score;
+                updateValues();
+                save();
+                this.TimeCircles().restart().rebuild();
+            }
+        });
 
     function handleError(message) {
         $("#errorMessage").text(message);
@@ -160,8 +235,6 @@ $(document).ready(function() {
             return false;
         }
 
-        //sendAjax($("#domoForm").attr("action"), $("#domoForm").serialize());
-
         startBuild(button.name);
 
         return false;
@@ -176,18 +249,40 @@ $(document).ready(function() {
 
         updateValues();
 
-        if(ship == "miner"){
+        switch(ship){
 
-            minerButton.hide();
-            minerTimer.TimeCircles().start();
+            case "miner":{
+
+                minerButton.hide();
+                minerTimer.TimeCircles().start();
+                break;
+            }
+            case "corvette":{
+
+                corvetteButton.hide();
+                corvetteTimer.TimeCircles().start();
+                break;
+            }
+            case "frigate":{
+
+                frigateButton.hide();
+                frigateTimer.TimeCircles().start();
+                break;
+            }
+            case "cruiser":{
+
+                cruiserButton.hide();
+                cruiserTimer.TimeCircles().start();
+                break;
+            }
+            case "battleship":{
+
+                battleshipButton.hide();
+                battleshipTimer.TimeCircles().start();
+                break;
+            }
         }
-        if(ship == "corvette"){
 
-            corvetteButton.hide();
-            corvetteTimer.TimeCircles().start();
-        }
-
-        buildQueue.push(ships[ship]);
     }
 
     function updateValues(){

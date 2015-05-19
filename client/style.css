@@ -3,7 +3,6 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: #6F706D;
     font-family: "Black Ops One", cursive;
     text-align: center;
@@ -63,9 +62,19 @@ html, body {
 
 #shipList .mats li{
 
-    border: none;
-    height: 30px;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-top: none;
+    border-bottom: none;
+    height: 20px;
+    padding-right: 2px;
+    padding-left: 2px;
     list-style: none;
+}
+
+.mats ul{
+
+    padding-left: 10px;
 }
 
 #shipList img{
@@ -81,6 +90,7 @@ html, body {
 
     float: left;
     margin-left: 10px;
+    font-size: 23px;
 }
 
 #shipList button{

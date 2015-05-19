@@ -33,10 +33,12 @@ block body
                   p Metal: 100
                 li
                   p Crystal: 10
-            div#minerTimer.timer(data-timer="11", name="miner")
+                li
+                  p Score: 1
+            div#minerTimer.timer(data-timer="6")
         button#buyMiner(name="miner") Build Ship
       li
-        img.shipIcon(src="", alt="shipIcon")
+        img.shipIcon(src="/assets/img/corvette.png", alt="shipIcon")
         h2 Corvette
         section.cost
             div.mats
@@ -47,8 +49,58 @@ block body
                   p Metal: 200
                 li
                   p Crystal: 50
-            div#corvetteTimer.timer(data-timer="16")
+                li
+                  p Score: 3
+            div#corvetteTimer.timer(data-timer="11")
         button#buyCorvette(name="corvette") Build Ship
+      li
+        img.shipIcon(src="/assets/img/frigate.png", alt="shipIcon")
+        h2 Frigate
+        section.cost
+            div.mats
+              ul
+                li
+                  p Credits: 350
+                li
+                  p Metal: 400
+                li
+                  p Crystal: 100
+                li
+                  p Score: 10
+            div#frigateTimer.timer(data-timer="21")
+        button#buyFrigate(name="frigate") Build Ship
+      li
+        img.shipIcon(src="/assets/img/cruiser.png", alt="shipIcon")
+        h2 Cruiser
+        section.cost
+            div.mats
+              ul
+                li
+                  p Credits: 500
+                li
+                  p Metal: 650
+                li
+                  p Crystal: 200
+                li
+                  p Score: 20
+            div#cruiserTimer.timer(data-timer="31")
+        button#buyCruiser(name="cruiser") Build Ship
+      li
+        img.shipIcon(src="/assets/img/battleship.png", alt="shipIcon")
+        h2 Battleship
+        section.cost
+            div.mats
+              ul
+                li
+                  p Credits: 1000
+                li
+                  p Metal: 1000
+                li
+                  p Crystal: 400
+                li
+                  p Score: 50
+            div#battleshipTimer.timer(data-timer="60")
+        button#buyBattleship(name="battleship") Build Ship
       span#errorMessage
 block scripts
         script(src="/assets/builder.js")
