@@ -31,7 +31,7 @@ var redisPASS;
 if(process.env.REDISCLOUD_URL){
 
     redisURL = url.parse(process.env.REDISCLOUD_URL);
-    redisPASS = redisURL.auth.split(":")[2];
+    redisPASS = redisURL.auth.split(":")[1];
 }
 
 //pull in our routes
