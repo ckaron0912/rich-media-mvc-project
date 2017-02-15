@@ -41,7 +41,7 @@ var server;
 var port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 var app = express();
-app.use("/assets", express.static(path.resolve(__dirname+"../../client/")));
+app.use('/assets', express.static(path.resolve(__dirname + '/../client/')));
 app.use(compression());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -65,7 +65,7 @@ app.use(session({
     }
 }));
 
-app.set("view engine", "jade");
+app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
 app.use(favicon(__dirname + "/../client/img/favicon.png"));
 app.disable('x-powered-by');
