@@ -9,22 +9,26 @@ $(document).ready(function() {
     }
     function sendAjax(action, data) {
       console.log('sendAjax');
-        $.ajax({
-            cache: false,
-            type: "POST",
-            url: action,
-            data: data,
-            dataType: "json",
-            success: function(result, status, xhr) {
-              console.log(result);
-                window.location = result.redirect;
-            },
-            error: function(xhr, status, error) {
-                var messageObj = JSON.parse(xhr.responseText);
-
-                handleError(messageObj.error);
-            }
+        $.post(action, data, function(result, status, xhr){
+          console.log(result);
+          window.location = result.redirect;
         });
+        // $.ajax({
+        //     cache: false,
+        //     type: "POST",
+        //     url: action,
+        //     data: data,
+        //     dataType: "json",
+        //     success: function(result, status, xhr) {
+        //       console.log(result);
+        //         window.location = result.redirect;
+        //     },
+        //     error: function(xhr, status, error) {
+        //         var messageObj = JSON.parse(xhr.responseText);
+        //
+        //         handleError(messageObj.error);
+        //     }
+        // });
     }
 
     $("#signupSubmit").on("click", function(e) {
