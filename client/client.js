@@ -8,6 +8,7 @@ $(document).ready(function() {
         $("#error").show();
     }
     function sendAjax(action, data) {
+      console.log('sendAjax');
         $.ajax({
             cache: false,
             type: "POST",
@@ -66,6 +67,7 @@ $(document).ready(function() {
 
     $("#loginSubmit").on("click", function(e) {
         e.preventDefault();
+        console.log(JSON.stringify($("#loginForm").serialize()));
 
         if($("#user").val() == '' || $("#pass").val() == '') {
             handleError("Username or password is empty");
@@ -78,7 +80,6 @@ $(document).ready(function() {
     });
 
     $("#loginForm").on("keyup", function(e) {
-
         if(e.keyCode == 13){
 
             if($("#user").val() == '' || $("#pass").val() == '') {
@@ -86,7 +87,7 @@ $(document).ready(function() {
                 return false;
             }
 
-            sendAjax($("#loginForm").attr("action"), $("#loginForm").serialize());
+            sendAjax($("#loginForm").attr("action"), JSON.parse($("#loginForm").serialize()));
         }
     });
 });
