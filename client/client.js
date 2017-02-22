@@ -9,26 +9,22 @@ $(document).ready(function() {
     }
     function sendAjax(action, data) {
       console.log('sendAjax');
-        $.post(action, data, function(result, status, xhr){
-          console.log(result);
-          window.location = result.redirect;
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: action,
+            data: data,
+            dataType: "json",
+            success: function(result, status, xhr) {
+              console.log(result);
+                window.location = result.redirect;
+            },
+            error: function(xhr, status, error) {
+                var messageObj = xhr.responseText;
+
+                handleError(messageObj.error);
+            }
         });
-        // $.ajax({
-        //     cache: false,
-        //     type: "POST",
-        //     url: action,
-        //     data: data,
-        //     dataType: "json",
-        //     success: function(result, status, xhr) {
-        //       console.log(result);
-        //         window.location = result.redirect;
-        //     },
-        //     error: function(xhr, status, error) {
-        //         var messageObj = JSON.parse(xhr.responseText);
-        //
-        //         handleError(messageObj.error);
-        //     }
-        // });
     }
 
     $("#signupSubmit").on("click", function(e) {
@@ -91,7 +87,7 @@ $(document).ready(function() {
                 return false;
             }
 
-            sendAjax($("#loginForm").attr("action"), JSON.parse($("#loginForm").serialize()));
+            sendAjax($("#loginForm").attr("action"), $("#loginForm").serializeA());
         }
     });
 });

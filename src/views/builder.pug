@@ -1,4 +1,4 @@
-extends ./base.jade
+extends ./base.pug
 block append style
     link(rel="stylesheet", type="text/css", href="/assets/style.css")
     link(rel="stylesheet", type="text/css", href="/assets/TimeCircles.css")
@@ -19,7 +19,7 @@ block body
         p#crystal #{crystal}
       li War Score
         p#score #{score}
-    input#csrf(type="hidden", name="_csrf", value="#{csrfToken}")
+    input#csrf(type="hidden", name="_csrf", value="" + csrfToken)
     ul#shipList
       span#errorMessage
       li

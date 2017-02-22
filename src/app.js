@@ -11,6 +11,8 @@ var RedisStore = require("connect-redis")(session);
 var url = require("url");
 var csrf = require("csurf");
 
+mongoose.Promise = require("bluebird");
+
 var dbURL = process.env.MONGOLAB_URI || "mongodb://localhost/Admiralty";
 
 var db = mongoose.connect(dbURL, function(err) {
@@ -70,7 +72,7 @@ app.set("views", __dirname + "/views");
 app.use(favicon(__dirname + "/../client/img/favicon.png"));
 app.disable('x-powered-by');
 app.use(cookieParser());
-app.use(csrf());
+app.use(csrf({ cookie: true}));
 
 app.use(function(err, req, res, next){
 

@@ -1,4 +1,4 @@
-extends ./base.jade
+extends ./base.pug
 block append style
     link(rel="stylesheet", type="text/css", href="/assets/style.css")
 block body
@@ -18,7 +18,7 @@ block body
       input#pass(type="password", name="pass", placeholder="password")
       label(for="pass2") Password:
       input#pass2(type="password", name="pass2", placeholder="retype password")
-      input(type="hidden", name="_csrf", value="#{csrfToken}")
+      input#csrf(type="hidden", name="_csrf", value="" + csrfToken)
     h3#error
       span#errorMessage
     a#signupSubmit(class="formSubmit", href="#") Register

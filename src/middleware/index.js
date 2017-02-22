@@ -27,7 +27,7 @@ var requiresSecure = function(req,res,next) {
 };
 
 var bypassSecure = function(req, res, next){
-    
+
     next();
 }
 
@@ -41,12 +41,3 @@ if(process.env.NODE_ENV === "production") {
 else {
     module.exports.requiresSecure = bypassSecure;
 }
-
-
-
-
-
-
-
-
-

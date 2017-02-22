@@ -18,7 +18,7 @@ var builderPage = function(req, res) {
             return res.status(400).json({error: "An error occurred!"});
         }
 
-        var jadeData = {
+        var pugData = {
             csrfToken: req.csrfToken(),
             username: req.session.account.username,
             "score": user.score,
@@ -29,7 +29,7 @@ var builderPage = function(req, res) {
         };
 
         //console.log(req.session.account.username);
-        res.render('builder', jadeData);
+        res.render('builder', pugData);
     });
 
 };

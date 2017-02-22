@@ -1,4 +1,4 @@
-extends ./base.jade
+extends ./base.pug
 block append style
     link(rel="stylesheet", type="text/css", href="/assets/style.css")
 block body
@@ -16,7 +16,7 @@ block body
       input#user(type="text", name="username", placeholder="username")
       label(for="pass") Password:
       input#pass(type="password", name="pass", placeholder="password")
-      input(type="hidden", name="_csrf", value="#{csrfToken}")
+      input#csrf(type="hidden", name="_csrf", value="" + csrfToken)
     h3#error
       span#errorMessage Wrong username or password
     a#loginSubmit(class="formSubmit", href="#") Sign in
