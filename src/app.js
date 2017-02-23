@@ -30,9 +30,9 @@ var redisURL = {
 
 var redisPASS;
 
-if(process.env.REDISCLOUD_URL){
+if(process.env.REDISCLOUD_ORANGE_URL){
 
-    redisURL = url.parse(process.env.REDISCLOUD_URL);
+    redisURL = url.parse(process.env.REDISCLOUD_ORANGE_URL);
     redisPASS = redisURL.auth.split(":")[1];
 }
 
