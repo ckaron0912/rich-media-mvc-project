@@ -16,7 +16,7 @@ $(document).ready(function() {
             data: data,
             dataType: "json",
             success: function(result, status, xhr) {
-              console.log(result);
+              //Sconsole.log(result);
                 window.location = result.redirect;
             },
             error: function(xhr, status, error) {
