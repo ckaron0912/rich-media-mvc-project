@@ -56,7 +56,7 @@ var save = function(req, res){
                 console.log(err);
                 return res.status(400).json({error: "An error occurred!"});
             }
-            console.log(status);
+            //console.log(status);
             return res.json({result: "sucess"});
         });
     });

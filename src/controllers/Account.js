@@ -19,7 +19,7 @@ var login = function(req, res) {
 
     var username = req.body.username;
     var password = req.body.pass;
-    console.log(username);
+    
     if(!username || !password) {
         return res.status(400).json({error: "All fields are required"});
     }

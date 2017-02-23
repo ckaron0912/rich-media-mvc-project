@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use(session({
+var sess = {
 
     key: "sessionid",
     store: new RedisStore({
@@ -61,11 +61,15 @@ app.use(session({
     secret: "Admiral on deck",
     resave: true,
     saveUninitialized: true,
-    cookie: {
+    cookie: {}
+};
 
-        httpOnly: true
-    }
-}));
+if(app.get('env') === 'production'){
+  app.set('trust proxy', 1);
+  sess.cookie.secure = true;
+}
+
+app.use(session(sess));
 
 app.set("view engine", "pug");
 app.set("views", __dirname + "/views");
