@@ -19,7 +19,7 @@ var login = function(req, res) {
 
     var username = req.body.username;
     var password = req.body.pass;
-    
+
     if(!username || !password) {
         return res.status(400).json({error: "All fields are required"});
     }
@@ -28,12 +28,11 @@ var login = function(req, res) {
         if(err || !account) {
             return res.status(401).json({error: "Wrong username or password"});
         }
-
+        req.session = {};
         req.session.account = account.toAPI();
 
         res.status(200).json({"redirect": "/builder"});
     });
-
 };
 
 var signup = function(req, res) {
